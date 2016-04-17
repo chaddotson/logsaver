@@ -10,8 +10,7 @@
     var _localStorageKeyForLog = "console.log.preserved";
     var _includeTimestamp = false;
     var _originalLog;
-    
-    
+        
     function _isEnabled() {
         return _originalLog !== undefined;
     }
@@ -26,14 +25,15 @@
        return this.getFullYear() + "/" + _zeroPad(this.getMonth()) + "/" + _zeroPad(this.getDay()) + " - " + _zeroPad(this.getHours()) + ":" + _zeroPad(this.getMinutes()) + ":" + _zeroPad(this.getSeconds());
     }
     
-    _root.clearPreservedLog = function () {
-        if(_isEnabled()) {
-            localStorage[_localStorageKeyForLog] = ""
+    _root.clearPreservedLog = function () {        
+        if(localStorage[_localStorageKeyForLog]) {
+            localStorage[_localStorageKeyForLog] = "";
         }
+        
     };
     
     _root.removePreservedLog = function () {
-        if(_isEnabled()) {
+        if(localStorage[_localStorageKeyForLog] !== undefined) {
             localStorage.removeItem(_localStorageKeyForLog);
         }
     };
