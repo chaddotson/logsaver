@@ -29,7 +29,6 @@
         if(localStorage[_localStorageKeyForLog]) {
             localStorage[_localStorageKeyForLog] = "";
         }
-        
     };
     
     _root.removePreservedLog = function () {
