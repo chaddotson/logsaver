@@ -16,6 +16,16 @@
         return _originalLog !== undefined;
     }
     
+    function _zeroPad(str) {
+        str = str + ""; // force it to be a string.
+        return ((str.length < 2) ? "0" + str : str);
+    
+    }
+    
+    function _formatDate() {
+       return this.getFullYear() + "/" + _zeroPad(this.getMonth()) + "/" + _zeroPad(this.getDay()) + " - " + _zeroPad(this.getHours()) + ":" + _zeroPad(this.getMinutes()) + ":" + _zeroPad(this.getSeconds());
+    }
+    
     _root.clearPreservedLog = function () {
         if(_isEnabled()) {
             localStorage[_localStorageKeyForLog] = ""
@@ -48,7 +58,7 @@
         }
                 
         _localStorageKeyForLog = options.keyForLocalStorage || _localStorageKeyForLog;
-        var timestampFormatter = options.timestampFormatter || Date.toLocaleString; 
+        var timestampFormatter = options.timestampFormatter || _formatDate; 
         
         _originalLog = console.log;
         
