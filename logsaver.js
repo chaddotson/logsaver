@@ -7,7 +7,7 @@
     
     var _root = root;
     
-    var _localStorageKeyForLog = "console.log.preserved";
+    var _localStorageKeyForLog = "console.log.saved";
     var _includeTimestamp = false;
     var _originalLog;
         
@@ -25,21 +25,21 @@
        return this.getFullYear() + "/" + _zeroPad(this.getMonth()) + "/" + _zeroPad(this.getDay()) + " - " + _zeroPad(this.getHours()) + ":" + _zeroPad(this.getMinutes()) + ":" + _zeroPad(this.getSeconds());
     }
     
-    _root.clearPreservedLog = function () {        
+    _root.clearSavededLog = function () {        
         if(localStorage[_localStorageKeyForLog]) {
             localStorage[_localStorageKeyForLog] = "";
         }
     };
     
-    _root.removePreservedLog = function () {
+    _root.removeSavedLog = function () {
         if(localStorage[_localStorageKeyForLog] !== undefined) {
             localStorage.removeItem(_localStorageKeyForLog);
         }
     };
     
-    _root.stopPreservingLog = function () {
+    _root.stopSavingLog = function () {
         if(!_isEnabled()) {
-            console.log("console.log preservation not enabled.");
+            console.log("No longer saving console.log to localStorage.");
             return;
         }
         
@@ -48,11 +48,11 @@
         console.log("console.log preservation disabled.");
     };
     
-    _root.startPreservingLog = function (options) {
+    _root.startSavingLog = function (options) {
         options = options || {};
                 
         if(_isEnabled()) {
-            _originalLog.call(console, "console.log preservation already enabled.");
+            _originalLog.call(console, "Already saving console.log. localStorage Key:" + _localStorageKeyForLog);
             return;
         }
                 
@@ -75,15 +75,15 @@
                 localStorage[_localStorageKeyForLog] += message;    
             } catch (e) {
                 if (e == QUOTA_EXCEEDED_ERR) {
-                    _originalLog.apply(console, arguments.splice(0, 0, "PRESERVATION FAILED - LOCAL STORAGE QUOTA EXCEEDED"));
+                    _originalLog.apply(console, arguments.splice(0, 0, "SAVE FAILED - LOCAL STORAGE QUOTA EXCEEDED"));
                 } else {
-                    _originalLog.apply(console, arguments.splice(0, 0, "PRESERVATION FAILED"));
+                    _originalLog.apply(console, arguments.splice(0, 0, "SAVE FAILED"));
                 }
                 
             }
         }
         
-        _originalLog.call(console, "console.log preservation enabled.");
+        _originalLog.call(console, "Now saving console.log to localStorage Key:" + _localStorageKeyForLog);
     };
         
 })(this);
