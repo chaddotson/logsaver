@@ -7,7 +7,7 @@
     
     var _root = root;
     
-    var _localStorageKeyForLog = "console.log.saved";
+    var _localStorageKeyForLog = "console.log.preserved";
     var _includeTimestamp = false;
     var _originalLog;
     
