@@ -25,7 +25,7 @@
        return this.getFullYear() + "/" + _zeroPad(this.getMonth()) + "/" + _zeroPad(this.getDay()) + " - " + _zeroPad(this.getHours()) + ":" + _zeroPad(this.getMinutes()) + ":" + _zeroPad(this.getSeconds());
     }
     
-    _root.clearSavededLog = function () {        
+    _root.clearSavedLog = function () {        
         if(localStorage[_localStorageKeyForLog]) {
             localStorage[_localStorageKeyForLog] = "";
         }
@@ -39,13 +39,14 @@
     
     _root.stopSavingLog = function () {
         if(!_isEnabled()) {
-            console.log("No longer saving console.log to localStorage.");
-            return;
+            console.log("Not currently saving console.log to localStorage.");
+            return false;
         }
         
         console.log = _originalLog;
         _originalLog = undefined;
-        console.log("console.log preservation disabled.");
+        console.log("No longer saving console.log to localStorage.");
+        return true;
     };
     
     _root.startSavingLog = function (options) {
@@ -53,7 +54,7 @@
                 
         if(_isEnabled()) {
             _originalLog.call(console, "Already saving console.log. localStorage Key:" + _localStorageKeyForLog);
-            return;
+            return false;
         }
                 
         _localStorageKeyForLog = options.keyForLocalStorage || _localStorageKeyForLog;
@@ -84,6 +85,7 @@
         }
         
         _originalLog.call(console, "Now saving console.log to localStorage Key:" + _localStorageKeyForLog);
+        return true;
     };
         
 })(this);
