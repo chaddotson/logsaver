@@ -1,4 +1,10 @@
+/*
+logsaver.js v0.1.0
+https://github.com/chaddotson/logsaver/
+(c) 2016 Chad Dotson
+logsaver.js may be freely distributed under the GNUv3 license.
 
+*/
 
 
 (function(root) {
