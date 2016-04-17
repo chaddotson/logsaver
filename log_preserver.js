@@ -77,7 +77,7 @@
                 if (e == QUOTA_EXCEEDED_ERR) {
                     _originalLog.apply(console, arguments.splice(0, 0, "PRESERVATION FAILED - LOCAL STORAGE QUOTA EXCEEDED"));
                 } else {
-                    // TODO: What to do...
+                    _originalLog.apply(console, arguments.splice(0, 0, "PRESERVATION FAILED"));
                 }
                 
             }
