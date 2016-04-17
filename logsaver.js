@@ -3,8 +3,7 @@
 
 (function(root) {
     'use strict';
-    console.log(window);
-    
+        
     var _root = root;
     
     var _localStorageKeyForLog = "console.log.saved";
