@@ -28,13 +28,17 @@
     _root.clearSavedLog = function () {        
         if(localStorage[_localStorageKeyForLog]) {
             localStorage[_localStorageKeyForLog] = "";
+            return true;
         }
+        return false;
     };
     
     _root.removeSavedLog = function () {
         if(localStorage[_localStorageKeyForLog] !== undefined) {
             localStorage.removeItem(_localStorageKeyForLog);
+            return true;
         }
+        return false;
     };
     
     _root.stopSavingLog = function () {
